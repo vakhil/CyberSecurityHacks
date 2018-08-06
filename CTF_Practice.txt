@@ -1,0 +1,34 @@
+Top websites for practicisng CTFs:
+a) ctflearn.com
+b) cybertalents.com 
+c) ctftime.org --> Lot of previous CTFs
+d) exploit-exercises.com --> Top of the list 
+
+
+
+Here are few of the CTF Website/wargames for practice :
+
+
+http://pwnable.kr/
+
+http://overthewire.org
+
+Exploit Exercises --> exploit-exercises.com
+
+http://hax.tor.hu/
+
+https://io.netgarage.org/
+
+https://pwn0.com/
+
+Hacker Challenges --> counterhack.net
+
+Vulnerable By Design ~ VulnHub --> VulnHub.com
+
+SmashTheStack Wargaming Network
+
+A site to test and learn about web hacking --> hackertest.net
+
+Stereotyped Challenges ( This one is created by my Team-mate. shouts to him) --> stypr.com
+
+Hack.me · The house of rising sandbox --> Hack.me

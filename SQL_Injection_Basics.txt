@@ -1,0 +1,27 @@
+i) Basic SQL query:
+ Select column1, column2 from table (where column1='xxx')  
+Output of above statement is:
+ Column1   Column2 
+ sss       akhil
+ hello     jello
+ cello     tatti  
+If you say Select * from table ( where column2 = 'xyz') Then you will get output all coloumns 
+ii) Use of Union 
+
+Union adds some more rows to the rows already there by select. Just one condition is that union should be with statements which 
+have the same number of columns as that one before.
+Example : select column1, column2 from table union select column1, column2 from table2
+Observe that both selects have some number of columns
+
+To get all databases command: Select table_schema from information_schema.schemata
+To get all tables in your databse : Select table_name from information_schema.tables where table_schema=database()
+To get all columns in one particular table: Select column_name from information_schema.columns where table_schema=database() and table_name='tablenamehere'
+Once we know the columns, we can get the data from mySql as folows : Select column1,column2 from 'tablename'
+
+
+iii) Get all Data:
+select * from table where userId='1'OR '1'='1
+select * from table where userId=1 OR 1=1
+
+For more info--> Refer 
+http://www.securityidiots.com/Web-Pentest/SQL-Injection/Part-1-Basic-of-SQL-for-SQLi.html 

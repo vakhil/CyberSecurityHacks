@@ -1,0 +1,43 @@
+Domain Name System (DNS)
+Basically, it converts the domain name to an IP Address.
+
+Lets define some terms properly :
+a) Domain --> Whole internet websites can be drawn as a tree. Such as the .com, .net,. in nodes lie in the branches of the root. Yahoo, google, bing all lie in the branches of Microsoft. So you, can basically draw a tree. Domain is a relativr term. Any node in the tree can be called as domain and the branches of it all are included in it's subdomain. Example, .com is a domain with bing, yahoo, google being the subdomain. Or, google is the domain and drive, photos, mail --> all are subdomain.
+
+b) Domain Name Space --> THe whole internet tree is called the domain name space.
+c) Name space -> Any part of the tree will be called as the name space.
+d) NameServer --> The server whom we contact for translating the address name to the IP address is called the Name Server.
+e) DNS Zone -> The part of the namespace that a given name server controls is called a zone. Basically, a part of the tree, which we are controlling. 
+f) FQDN (Fully Qualified Domain Name) -> full website along with a dot at the end. Eg-> google.com. ,,, We do not type the . at the end but the browser does that for us.
+
+
+Steps on how a DNS works when we type a website name: (https://www.youtube.com/watch?v=T-eghY-9WdE)
+i) When we type a website(wwww.google.com) in the Application layer and want to receive the information from it, The Internet Layer (IP) wants to know the IP, where we need to send the HTTP request for getting back the website HTML. So, first we search our local DNS cache on our computer (also called resolver). If, we have the IP Address we need, we send our HTTP request to that IP Address. Otherwise, we send it to the DNS server configured on our wifi or LAN connection. Here in my Windows PC, I have configured it to be 192.168.31.1. We will call this DNS dc01 . So , we next ask this DNS wether it knows what the IP Address of the website is. If it knows, dc01 replies with the IP Address. Otherwise, dc01 asks the root nameserver (.) whether it knows the address(www.google.com). Root DNS says I know where the .com nameserver is and asks us to contact .com nameserver. dc01 asks the .com nameserver wether it knows whhat is the IP Address of (www.google.com). .com nameServer says i know the nameserver for google.com and gives us the nameServer for google.com. dc01 then goes to google.com nameserver and there we can find the IP Address of www.google.com.
+
+Suppose we wanted to go to drive.google.com. Then, same process above is repeated. After we reach google.com nameServer, we ask it for the nameServer for drive.google.com and so on.
+
+Example information stored in google.com nameserver: This is our zone files:
+
+google.com A 192.172.23.23 ->Translation For www.google.com 
+nameServer1 A 168.56.56.5
+nameServer2 A 73.34.343.3
+drive.google.com_NS A 168.23.23.23 -> NameServer for drive.google.com and not the IP Adress of drive.google.com itself 
+ 
+ Whenver a new domain name(drfox.com) is purchased, goDaddy provides our domain with 2 DNS nameServers. goDaddy also tells the .com nameserver to add an entry to our new nameServers.  
+
+Sending an email-> Role of a DNS :
+*********************************
+When we send a mail to vakhil@google.com, EMail is a application in the Application Layer. It needs to where to send data to (IP Address). We repeat the whole process except that instead of 'A' record in google.com , we search for MX record in google.com. From here, we get the IP and we send the message(let's say 143.33.3.3). The application layer at 143.33.3.3 gets the message and will know what to do there.
+
+ ZoneTransfer AXFR:
+ We need to maintain consistency with the 2 DNS Servers(may have more than 2 in case of a larger service) serving us. We need to have the same data in both of them. So, we use a technique called AXFR to tranfer all the information from one DNS to another. But, there is a huge risk of someone posing as an DNS server and capturing all the information from a DNS. The information in the DNS includes all the domains on its network. Like the IP Adrress of  (news.drfox.com and egg.drfox.com. So, in any DNS we maintain, we switch off the DNS Zone Transfer so that all information is not displayed.
+
+ Read : https://digi.ninja/projects/zonetransferme.php
+
+ nslookup is used when we are using Windows and dig is used when we are using Linux for capturing DNS Information.
+i)  dig +short ns zonetransfer.me --> Gives the DNS nameservers for zonetransfer.me website
+
+ nsztm1.digi.ninja.
+Nsztm2.digi.ninja.
+
+ii) dig axfr zonetransfer.me @nsztm1.digi.ninja. -> Gives all the zone file information in the nameserver of zonetransfer.me  All the A , MX and other records
